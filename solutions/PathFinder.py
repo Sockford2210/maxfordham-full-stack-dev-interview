@@ -31,7 +31,7 @@ class AStarPathFinder:
             self.visited_points.add(point)
 
             if point == self.goal:
-                return reconstruct_path(current_node)
+                return current_node
 
             self.add_next_directions_to_queue(current_node)
 

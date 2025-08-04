@@ -45,7 +45,7 @@ class StudWallGridMap(GridMap):
 class StandardGridMap(GridMap):
     pass
 
-def plot_path_on_grid_map(grid_map, start, goal, path):
+def plot_path_on_grid_map(grid_map, start, goal, path, direction_change_points=None):
     grid = grid_map.grid
 
     fig, ax = plt.subplots(figsize=(10, 10))
@@ -56,6 +56,10 @@ def plot_path_on_grid_map(grid_map, start, goal, path):
     if path:
         for i in range(1, len(path) - 1):
             ax.scatter(path[i][1], path[i][0], color="blue", s=10)
+
+    if direction_change_points:
+        for point in direction_change_points:
+            ax.scatter(point[1], point[0], marker="^", color="green", s=50)
             
     plt.show()
 

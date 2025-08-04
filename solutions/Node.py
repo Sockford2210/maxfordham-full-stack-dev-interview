@@ -20,3 +20,16 @@ def reconstruct_path(node):
         path.append((node.y, node.x))
         node = node.parent
     return path[::-1]
+
+def get_direction_changes(node):
+    points = []
+    previous_node = None
+    while node:
+        if previous_node and previous_node.direction != node.direction:
+            #Change to previous_node to return node with direction change rather than point of turn
+            points.append((node.y, node.x))
+        previous_node = node
+        node = node.parent
+
+    #Do not return start node point
+    return points[:-1][::-1]
