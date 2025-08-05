@@ -1,7 +1,6 @@
 from Map import GridPoint, build_standard_grid_map_from_file, plot_path_on_grid_map
 from PathFinder import AStarPathFinder
 from Directions import create_diagonal_movement
-from Node import reconstruct_path
 
 grid_map = build_standard_grid_map_from_file("grid.tsv")
 
@@ -12,14 +11,16 @@ start = GridPoint(40, 18)
 goal = GridPoint(25, 92)
 
 path_finder = AStarPathFinder(grid_map, start, goal, movement)
-final_path_node = path_finder.find_path()
-path = reconstruct_path(final_path_node)
+path = path_finder.find_path()
+path_points = path.reconstruct_path()
 
-if path:
-    print(f"Path length: {len(path)}")
-    plot_path_on_grid_map(grid_map, start, goal, path)
+if path_points:
+    print(f"Path cost: {path.get_total_cost()}")
+    print(f"Path length: {path.get_total_length()}")
+    plot_path_on_grid_map(grid_map, start, goal, path_points)
 else:
     print("No path found.")
 
 del path_finder
 del grid_map
+del path

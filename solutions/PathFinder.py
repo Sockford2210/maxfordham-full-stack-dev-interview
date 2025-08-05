@@ -1,5 +1,5 @@
 import heapq
-from Node import Node, reconstruct_path
+from Path import Path, Node
 from Directions import manhattan_distance
 from Map import GridPoint, GridMap
 
@@ -19,7 +19,9 @@ class AStarPathFinder:
         start_heuristic = self.movement.distance(self.start.x, self.start.y, self.goal.x, self.goal.y)
         start_node = Node(self.start.x, self.start.y, 0, start_heuristic)
 
-        self.add_next_directions_to_queue(start_node)
+        path = Path(self.grid_map.grid, self.movement)
+
+        self.add_next_nodes_to_queue(start_node)
 
         while self.node_queue:
             current_node = heapq.heappop(self.node_queue)
@@ -31,16 +33,16 @@ class AStarPathFinder:
             self.visited_points.add(point)
 
             if point == self.goal:
-                return current_node
+                path.setEndNode(current_node)
+                return path
 
-            self.add_next_directions_to_queue(current_node)
+            self.add_next_nodes_to_queue(current_node)
 
         return None
 
-
-    def add_next_directions_to_queue(self, current_node):
-        for direction, (dy, dx) in self.movement.directions.items():
-            delta = GridPoint(dx, dy)
+    def add_next_nodes_to_queue(self, current_node):
+        for direction in self.movement.directions:
+            delta = GridPoint(direction.x, direction.y)
             new_x = current_node.x + delta.x
             new_y = current_node.y + delta.y
 

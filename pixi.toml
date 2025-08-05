@@ -15,3 +15,4 @@ solution_1_stud_wall = 'python .\solutions\1_stud_wall.py'
 numpy = ">=2.3.2,<3"
 matplotlib = ">=3.10.3,<4"
 jupyterlab = ">=4.4.5,<5"
+fluids = ">=1.1.0,<2"

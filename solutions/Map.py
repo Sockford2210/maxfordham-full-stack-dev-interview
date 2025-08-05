@@ -63,13 +63,13 @@ def plot_path_on_grid_map(grid_map, start, goal, path, direction_change_points=N
             
     plt.show()
 
+#Imports a tsv/csv file and converts it to a grid matrix
 def import_grid_matrix_from_file(filepath):
     rows = list(csv.reader(Path(filepath).open(encoding="utf-8"), delimiter="\t"))
     grid = np.array([[int(x) for x in row] for row in rows])
 
     return grid
 
-#Imports a tsv/csv file and converts it to a grid matrix
 def build_standard_grid_map_from_file(filepath):
     grid = import_grid_matrix_from_file(filepath)
 
