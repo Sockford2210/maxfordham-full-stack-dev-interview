@@ -10,6 +10,8 @@ jlab = "jupyter lab question-python-engineering.ipynb"
 solution_1 = 'python .\solutions\1.py'
 solution_1_diagonal = 'python .\solutions\1_diagonal.py'
 solution_1_stud_wall = 'python .\solutions\1_stud_wall.py'
+solution_3 = 'python .\solutions\3.py'
+solution_2 = 'python .\solutions\2.py'
 
 [dependencies]
 numpy = ">=2.3.2,<3"
