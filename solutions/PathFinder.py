@@ -6,6 +6,8 @@ from Map import GridPoint, GridMap
 CHANGE_DIRECTION_COST = 2
 BASE_MOVE_COST = 1
 
+#Path finder class leveraging the A* path finding algorithm to find the quickest route between a start
+#and goal point on a given map with allowed movement.
 class AStarPathFinder:
     def __init__(self, grid_map, start, goal, movement):
         self.grid_map = grid_map
@@ -15,6 +17,7 @@ class AStarPathFinder:
         self.visited_points = set()
         self.node_queue = []
 
+    #Returns a Path object containing the full path from start to goal
     def find_path(self):
         start_heuristic = self.movement.distance(self.start.x, self.start.y, self.goal.x, self.goal.y)
         start_node = Node(self.start.x, self.start.y, 0, start_heuristic)

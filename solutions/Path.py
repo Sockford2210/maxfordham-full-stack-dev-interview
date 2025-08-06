@@ -1,7 +1,8 @@
 import math
 from Directions import degrees_between_directions
 
-#Entity to store entire path
+#Entity to store entire path, has a grid and allowed movement
+#Stores the end node and contains methods to return path properties
 class Path:
     def __init__(self, grid, movement):
         self.movement = movement
@@ -28,6 +29,8 @@ class Path:
             node = node.parent
         return path_points[::-1]
 
+    #Get all of the points at which the direction changes
+    #The point before the direction change is returned to show where the bend would actually be.
     def get_direction_change_points(self):
         points = []
         node = self.end
@@ -51,6 +54,8 @@ class Path:
 
         return total_length
 
+#Class to encapsulate the Node of a path, works as a single-direction linked-list pointing to 
+#it's parent node, which allows for traversal to resconstruct the path from the end.
 class Node:
     def __init__(self, x, y, cost, heuristic, direction=None, parent=None):
         self.x = x

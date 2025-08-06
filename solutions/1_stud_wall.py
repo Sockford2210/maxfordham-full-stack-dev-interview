@@ -6,7 +6,6 @@ grid_map = build_stud_wall_grid_map_from_file("stud_walls_grid.tsv")
 
 movement = create_orthogonal_movement()
 
-#Define start and end
 start = GridPoint(50, 8)
 goal = GridPoint(25, 92)
 

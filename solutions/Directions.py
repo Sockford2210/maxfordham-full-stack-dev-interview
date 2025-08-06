@@ -19,6 +19,7 @@ DIAGONAL_DIRECTIONS = {
     'down-right': (1, 1),
 }
 
+#Takes a hardcoded set of direction definitions and returns a collection of Direction objects
 def build_directions(direction_definitions):
     directions = set()
     for name, (dy, dx) in direction_definitions.items():
@@ -27,6 +28,7 @@ def build_directions(direction_definitions):
 
     return directions
 
+#Class to encapsulate movement in a direction, has a delta x and y and name
 class Direction:
     def __init__(self, name, x, y):
         self.name = name
@@ -36,25 +38,31 @@ class Direction:
     def get_length(self):
         return math.sqrt(self.x**2 + self.y**2)
 
-#Returns manhatten heuristic for a given node
+#Returns manhatten distance between two given points
 def manhattan_distance(x1, y1, x2, y2):
     return abs(x1 - x2) + abs(y1 - y2)
 
+#Returns chebyshev distance between two given points
 def chebyshev_distance(x1, y1, x2, y2):
     x_dif = abs(x1 - x2)
     y_dif = abs(y1 - y2)
     return max(x_dif, y_dif)
 
+#Class to encapsulate allowed movement, contains a set of allowed directions
+#and a method to get the distance between two points
 class Movement:
     def __init__(self):
         self.directions = build_directions(OTHOGONAL_DIRECTIONS)
 
+    #Method to get the distance between two points
     def distance(self, x1, y1, x2, y2):
         return manhattan_distance(x1, y1, x2, y2)
 
+#Implementation of Movement allowing orthogonal single cell movement only
 class OrthogonalMovement(Movement):
     pass
 
+#Implementation of Movement allowing diagonal single cell movement
 class DiagonalMovement(Movement):
     def __init__(self):
         self.directions = build_directions(DIAGONAL_DIRECTIONS)
@@ -67,7 +75,8 @@ def create_orthogonal_movement():
 
 def create_diagonal_movement():
     return DiagonalMovement()
-    
+
+#Returns the angle in degrees between two different Direction objects
 def degrees_between_directions(direction1, direction2):
     dot = direction1.x*direction2.x + direction1.y*direction2.y
     mag1 = math.sqrt(direction1.x**2 + direction1.y**2)

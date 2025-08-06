@@ -1,13 +1,9 @@
-#Methods to create a grid matrix
-#Grid is grid[y][x]
-#Y increases top to bottom
-#X Increases left to right
-
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
 from pathlib import Path
 
+#Encapsulates a point on a grid
 class GridPoint:
     def __init__(self, x, y):
         self.x = x
@@ -19,6 +15,9 @@ class GridPoint:
     def __hash__(self):
         return int(((self.x + self.y)*(self.x + self.y + 1))/2 + self.y)
 
+#Class to encapsulate a given grid matrix, with rules on what points can be penetrated#Grid is grid[y][x]
+#Y increases top to bottom
+#X Increases left to right
 class GridMap:
     def __init__(self, grid):
         self.grid = grid
@@ -38,13 +37,17 @@ class GridMap:
     def wall_cost(self, x, y):
         return self.grid[y][x]
 
+#Implementation of GridMap with penetrable stud wall, inpenetrable walls have value 
+#of 100.
 class StudWallGridMap(GridMap):
     def is_point_penetrable(self, x, y):
         return self.grid[y][x] != 100
 
+#Standard implementation of GridMap
 class StandardGridMap(GridMap):
     pass
 
+#Plots a grid map with start and goal points and optional direction change points
 def plot_path_on_grid_map(grid_map, start, goal, path, direction_change_points=None):
     grid = grid_map.grid
 
@@ -70,12 +73,15 @@ def import_grid_matrix_from_file(filepath):
 
     return grid
 
+#Builds a StandardGridMap from file
 def build_standard_grid_map_from_file(filepath):
     grid = import_grid_matrix_from_file(filepath)
 
     grid_map = StandardGridMap(grid)
     return grid_map
 
+#Builds a StudWallGridMap from file, walls (value=1) are converted to 100
+#This is done primarily for plotting purposes.
 def build_stud_wall_grid_map_from_file(filepath):
     grid = import_grid_matrix_from_file(filepath)
 

@@ -6,6 +6,8 @@ from Directions import degrees_between_directions
 DYNAMIC_VISCOSITY = 1E-3
 FLUID_DENSITY = 1000
 
+#Class representing piping with defined diamter and roughness
+#Initially empty, bends and straight sections must be added.
 class Piping:
     def __init__(self, diameter, roughness):
         self.diameter = diameter
@@ -52,12 +54,14 @@ class Piping:
         dp = dP_from_K(K, rho=self.roughness, V=velocity)
         return dp
 
+#Class representing bend in pipe, contains coordinates and bend angle
 class Bend:
     def __init__(self, x, y, degrees):
         self.x = x
         self.y = y
         self.degrees = degrees
 
+#Class representing straight section of piping, contains start and end coordinates
 class StraightSection:
     def __init__(self, x1, y1, x2, y2):
         self.x1 = x1
@@ -70,6 +74,7 @@ class StraightSection:
         delta_y = abs(self.y2 - self.y1)
         return math.sqrt(delta_x**2 + delta_y**2)
 
+#Method to take a given Path and convert it to Piping
 def convert_path_to_piping(path, diameter, roughness):
     piping = Piping(diameter, roughness)
 
@@ -81,6 +86,7 @@ def convert_path_to_piping(path, diameter, roughness):
 
     return piping
 
+#Takes a path and retrieves all bends for piping along that path
 def get_bends_in_path(path):
     bends = []
     node = path.end
@@ -95,6 +101,7 @@ def get_bends_in_path(path):
 
     return bends[::-1]
 
+#Takes a path and retrieves all straigh sections for piping along that path
 def get_straight_sections_in_path(path):
     straight_sections = []
     node = path.end
