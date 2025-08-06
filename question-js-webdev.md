@@ -42,7 +42,7 @@ What third-part tools need to be integrated with, this might include:
 
 
 ### Design
-####Reusable Components
+#### Reusable Components
 There a 3 separate components defined here which should be reusable across all pages:
 - Navigation Sidebar
 - Header
