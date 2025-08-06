@@ -51,6 +51,7 @@ There a 3 separate components defined here which should be reusable across all p
 
 ####Structure
 Following the standard nuxt structure, the structure of the code under src would look something like:
+```
 project-root/
 ├── assets/          # Uncompiled assets like SCSS, images, fonts
 ├── components/      # Reusable Vue components
