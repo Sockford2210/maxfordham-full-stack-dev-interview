@@ -11,20 +11,20 @@ As part of this, we have decided to use Nuxt as the framework for the site, incl
 For this exercise, we are not concerned with code, but rather what considerations you would have for the design based on the information about the listed resources. Give some examples of how you would structure such an application.
 ```
 
-##Answer
+## Answer
 
-###Considerations
+### Considerations
 
-####Site Improvements
+#### Site Improvements
 Why are we upgrading to Vue3 and using the NuxtUI component library, does this actively solve any headaches we've had when devloping in the past?
 - Need to identify the parts of the codebase that are made easier by updating frameworks to leverage the improvements
 - What are previous complaints with the site how can these be improved?
 
-####Hosting
+#### Hosting
 Are we going to host on a cloud service and make use of distribution, does content differ between users in a way that would affect page caching in a CDN?
 Is this app going to be exposed publicly, what should not be indexed by google?
 
-####Security
+#### Security
 General security considerations include:
 - How to manage certificates.
 - What interactions are taking place over the browser? If transactions happen from the browser ideally need to use temporary keys such as OAUTH2 tokens.
@@ -32,7 +32,7 @@ General security considerations include:
 - Ensure that any data access over the browser does not expose and form of query language. Ideally this should be abstracted out and data access queries should be formed server side.
 - Content-security policy should be added to limit potential for XSS with the addition of random nonce tokens generated server-side for any inline scripts
 
-####Integrations
+#### Integrations
 What third-part tools need to be integrated with, this might include:
 - Backend CMS
   - How is content going to be retireved from the CMS, headless API?
@@ -41,7 +41,7 @@ What third-part tools need to be integrated with, this might include:
   - Is content being loaded on the page directly from these sites? These need to be included in the CSP.
 
 
-###Design
+### Design
 ####Reusable Components
 There a 3 separate components defined here which should be reusable across all pages:
 - Navigation Sidebar
@@ -49,7 +49,7 @@ There a 3 separate components defined here which should be reusable across all p
 - User Avatar
 - Menu
 
-####Structure
+#### Structure
 Following the standard nuxt structure, the structure of the code under src would look something like:
 ```
 project-root/
@@ -76,7 +76,7 @@ The header would import the **UserAvatar** and **MenuDropdown** components while
 
 Routing for pages is handled automatically
 
-###Benefits of Nuxt
+### Benefits of Nuxt
 Some benefits of Nuxt:
 - Routing handled automatically by structure under 'pages' folder
 - Only js required for the requested page is sent to the browser, improving load times
